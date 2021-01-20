@@ -15,11 +15,13 @@ client.on('message', async message => {
 
 client.on('guildMemberAdd', member => {
     if(member.guild.id !== '794380572323086358') return;
+    if(member.user.bot) return member.roles.add('794410823564918835');
     client.channels.cache.get('794380572931391511').send(`${member}よおこそ`);
 })
 
 client.on('guildMemberRemove', member => {
     if(member.guild.id !== '794380572323086358') return;
+    if(member.user.bot) return;
     client.channels.cache.get('794380572931391511').send(`${member}さよなら`);
 })
 
