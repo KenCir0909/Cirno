@@ -64,9 +64,7 @@ process.on('unhandledRejection', (reason, promise) => {
     .setColor('RANDOM')
     .setTimestamp()
   );
-  promise.then(promisename => {
-    console.error(`エラー内容: ${reason}\n拒否されたプロミス: ${promisename}`);
-  });
+  console.error(`エラー内容: ${reason}`);
 });
 
 client.login();
