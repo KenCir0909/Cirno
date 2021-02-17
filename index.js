@@ -60,11 +60,13 @@ client.on('guildBanRemove', (guild, user) => {
 process.on('unhandledRejection', (reason, promise) => {
   client.users.cache.get('714455926970777602').send(
     new MessageEmbed()
-    .setDescription(`エラー内容: ${reason}\n拒否されたプロミス: ${promise}`)
+    .setDescription(`エラー内容: ${reason}`)
     .setColor('RANDOM')
     .setTimestamp()
   );
-  console.error(`エラー内容: ${reason}\n拒否されたプロミス: ${promise}`);
+  promise.then(promisename => {
+    console.error(`エラー内容: ${reason}\n拒否されたプロミス: ${promisename}`);
+  });
 });
 
 client.login();
