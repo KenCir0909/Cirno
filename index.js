@@ -25,12 +25,11 @@ client.on('message', async message => {
 client.on('guildMemberAdd', member => {
     if(member.guild.id !== '794380572323086358') return;
     if(member.user.bot) return member.roles.add('794410823564918835');
-    let invite, inviteuser;
+    let invite = {};
     member.guild.fetchInvites().then(invites => {
       const oldInvites = allInvites[member.guild.id];
       allInvites[member.guild.id] = invites;
       invite = invites.find(i => oldInvites.get(i.code).uses < i.uses);
-      inviteuser = invites.find(i => oldInvites.get(i.code).inviter);
     })
     client.channels.cache.get('811254308989042789').send(`${member} よおこそ`);
     client.channels.cache.get('794380572931391511').send(
@@ -39,8 +38,9 @@ client.on('guildMemberAdd', member => {
       .addField('User名', member.user.tag)
       .addField('UserID', member.user.id)
       .addField('垢作ってから経った日数',  Math.round((Date.now() - member.user.createdAt) / 86400000))
-      .addField('使用した招待コード', invite)
-      .addField('招待した人', inviteuser)
+      .addField('使用した招待コード', invite.code)
+      .addField('招待したユーザー名', invite.inviter.tag)
+      .addField('招待したユーザーID', invite.inviter.id)
       .setColor('RANDOM')
       .setTimestamp()
     );
