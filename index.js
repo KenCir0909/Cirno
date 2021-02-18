@@ -2,14 +2,11 @@ require('dotenv').config();
 const { Client, Intents, MessageEmbed } = require('discord.js');
 const client = new Client({ ws: { intents: Intents.ALL }});
 
-const allInvites = {}
-
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
 })
 
 client.on('message', async message => {
-  message.author.createdTimestamp
   if(message.author.bot) return;
   if (message.content === 'チルノちゃん大好き！') {
     return message.channel.send(`あたいも大好きだよ！ ${message.author}`);
