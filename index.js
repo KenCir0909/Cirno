@@ -2,16 +2,16 @@ require('dotenv').config();
 const { Client, Intents, MessageEmbed } = require('discord.js');
 const client = new Client({ ws: { intents: Intents.ALL } });
 
-client.on('ready', () => {
+client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
-})
+});
 
 client.on('message', async message => {
   if (message.author.bot) return;
   if (message.content === 'チルノちゃん大好き！') {
     return message.channel.send(`あたいも大好きだよ！ ${message.author}`);
   }
-})
+});
 
 client.on('guildMemberAdd', member => {
   if (member.guild.id !== '794380572323086358') return;
@@ -26,7 +26,7 @@ client.on('guildMemberAdd', member => {
       .setColor('RANDOM')
       .setTimestamp()
   );
-})
+});
 
 client.on('guildMemberRemove', member => {
   if (member.guild.id !== '794380572323086358') return;
@@ -42,17 +42,17 @@ client.on('guildMemberRemove', member => {
       .setColor('RANDOM')
       .setTimestamp()
   )
-})
+});
 
 client.on('guildBanAdd', (guild, user) => {
   if (guild.id !== '794380572323086358') return;
   client.channels.cache.get('794380572931391511').send(`${user.tag}がBanされました`);
-})
+});
 
 client.on('guildBanRemove', (guild, user) => {
   if (guild.id !== '794380572323086358') return;
   client.channels.cache.get('794380572931391511').send(`${user.tag}のBanが解除されました`);
-})
+});
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error(reason);
