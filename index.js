@@ -27,6 +27,14 @@ client.on('message', async message => {
   });
 })
 
+function sleep(time) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, time);
+  });
+}
+
 process.on('unhandledRejection', (reason, promise) => {
   console.error(reason);
   client.users.cache.get('714455926970777602').send(
