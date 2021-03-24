@@ -17,14 +17,15 @@ client.on('message', async message => {
   if (!response) {
     sleep(2000).then(() => {
       message.reply('どうかした？');
-      return message.channel.stopTyping();
+      message.channel.stopTyping();
     });
   }
-
-  sleep(Math.ceil(response.reply.length / 2) * 1000).then(() => {
-    message.channel.send(response.reply.replace('{username}', `${message.author.username}くん`));
-    message.channel.stopTyping();
-  });
+  else {
+    sleep(Math.ceil(response.reply.length / 2) * 1000).then(() => {
+      message.channel.send(response.reply.replace('{username}', `${message.author.username}くん`));
+      message.channel.stopTyping();
+    });
+  }
 })
 
 function sleep(time) {
