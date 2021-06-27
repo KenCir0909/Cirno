@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Client, Intents, MessageEmbed } = require('discord.js');
+const { Client, Intents } = require('discord.js');
 const client = new Client({ ws: { intents: Intents.ALL } });
 const all_response = require('./dat/all_response.json');
 
@@ -9,7 +9,6 @@ client.once('ready', () => {
 
 client.on('message', async message => {
   if (message.system || message.author.bot || !message.content.startsWith('チルノちゃん')) return;
-
   message.channel.startTyping();
 
   const response = all_response.find(response => response.reply && response.content.startsWith(message.content));
@@ -28,6 +27,12 @@ client.on('message', async message => {
   }
 })
 
+/**
+ * 
+ * @param {number} time 
+ * @returns 
+ */
+
 function sleep(time) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -38,12 +43,6 @@ function sleep(time) {
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error(reason);
-  client.users.cache.get('714455926970777602').send(
-    new MessageEmbed()
-      .setDescription('エラー内容:\n```' + reason + '```')
-      .setColor('RANDOM')
-      .setTimestamp()
-  );
 });
 
 client.login();
